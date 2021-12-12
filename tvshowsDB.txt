@@ -1,0 +1,42 @@
+CREATE DATABASE tvshows;
+SHOW DATABASES;
+USE tvshows;
+CREATE TABLE tvshows(
+    id int(11) not null auto_increment,
+    name varchar(255) not null,
+    genre varchar(255) not null default '',
+    premiere date not null,
+    final date not null,
+    PRIMARY KEY(id)
+    );
+SHOW TABLES;
+DESC tvshows;
+SHOW create table tvshows;
+ALTER TABLE tvshows ADD column seasons int not null default '1';
+INSERT INTO tvshows SET name = "Breaking Bad", genre = "criminal", premiere = '2008-01-20', final = '2013-09-29', seasons = 5;
+SELECT * FROM tvshows;
+INSERT INTO tvshows (name, genre, premiere, final, seasons) VALUES 
+    ("Game of Thrones", "fantasy", '2011-04-17', '2019-05-19', 8),
+    ("Stranger Things", "horror", '2016-10-27', '2019-07-04', 3),
+    ("Sherlock", "detective", '2010-07-25', '2017-01-15', 4),
+    ("How I met your mother", "comedy", '2005-09-19', '2014-03-31', 9);
+INSERT INTO tvshows VALUES
+    (6, "White Collar", "detective", '2009-10-23', '2014-12-18', 6),
+    (7, "House, M.D.", "drama", '2004-10-16', '2012-05-21', 8),
+    (8, "Westworld", "fantastic", '2016-10-02', '2020-05-03',3);
+INSERT INTO tvshows SET name = "Cherlobyl", genre = "drama", premiere = '2019-05-06', final ='2019-06-03'; 
+INSERT INTO tvshows SET name = "Doctor Who", genre = "fantastic", premiere = '2005-05-21', final ='2021-11-21', seasons = 13;   
+
+SELECT name, genre FROM tvshows;
+SELECT * FROM tvshows WHERE id > 5; 
+SELECT name FROM tvshows WHERE id > 5; 
+SELECT name FROM tvshows WHERE YEAR(premiere) >= 2010;
+SELECT * FROM tvshows WHERE MONTH(final) BETWEEN 6 and 8;
+SELECT * FROM tvshows WHERE DAY(premiere) = 16;
+SELECT * FROM tvshows WHERE DAY(premiere) = 16 OR DAY(final) = 4;
+SELECT name AS The_most_durable_tv_show FROM tvshows ORDER BY seasons DESC limit 1;
+SELECT name, genre FROM tvshows WHERE genre IN ("drama", "comedy");
+SELECT genre, count(*) FROM tvshows WHERE genre = 'drama' or genre = 'fantastic' GROUP BY genre;
+SELECT name from tvshows ORDER BY YEAR(premiere) limit 1;
+SELECT name, seasons FROM tvshows GROUP BY YEAR(premiere) HAVING seasons <= 3;
+ 
